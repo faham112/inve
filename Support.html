@@ -1,0 +1,231 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="./src/output.css" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <title>Support - HYIP Admin Dashboard</title>
+    <style>
+      .sidebar { transition: transform 0.3s ease; }
+      @media (max-width: 767px) {
+        .sidebar { position: fixed; left: 0; top: 0; z-index: 50; transform: translateX(-100%); width: 100%; height: 100vh; }
+        .sidebar.open { transform: translateX(0); }
+      }
+    </style>
+  </head>
+
+  <body class="bg-gradient-to-br from-purple-950 via-purple-900 to-purple-950 font-sans min-h-screen flex flex-col md:flex-row">
+    <!-- Mobile Menu Button -->
+    <button class="fixed md:hidden top-4 left-4 z-50 bg-purple-800 text-purple-100 p-2 rounded-lg hover:bg-purple-700 transition" onclick="toggleSidebar()">
+      <i data-lucide="menu" class="w-6 h-6"></i>
+    </button>
+
+    <!-- Sidebar Overlay for Mobile -->
+    <div id="sidebarOverlay" class="hidden md:hidden fixed inset-0 bg-black bg-opacity-50 z-40 transition" onclick="closeSidebar()"></div>
+
+    <!-- Sidebar -->
+    <div class="sidebar w-64 bg-gradient-to-b from-purple-900 to-purple-950 border-r border-purple-700 h-screen overflow-y-auto flex flex-col fixed md:static -translate-x-full md:translate-x-0 transition-transform duration-300 z-50" id="sidebar">
+      <!-- Logo -->
+      <div class="p-6 border-b border-purple-700 flex items-center justify-between">
+        <div>
+          <h1 class="text-2xl font-bold text-purple-100">HYIP Admin</h1>
+          <p class="text-purple-400 text-sm">Management Panel</p>
+        </div>
+        <!-- Close button for mobile -->
+        <button class="md:hidden bg-purple-800 hover:bg-purple-700 text-purple-100 p-1 rounded" onclick="closeSidebar()">
+          <i data-lucide="x" class="w-6 h-6"></i>
+        </button>
+      </div>
+
+      <!-- Navigation Menu -->
+      <nav class="p-4 space-y-2 flex-1">
+        <a href="./Index.html" class="flex items-center gap-3 px-4 py-3 rounded-lg text-purple-300 hover:bg-purple-800 transition" onclick="closeSidebar()">
+          <i data-lucide="home" class="w-5 h-5"></i>
+          <span>Dashboard</span>
+        </a>
+        <a href="./Users.html" class="flex items-center gap-3 px-4 py-3 rounded-lg text-purple-300 hover:bg-purple-800 transition" onclick="closeSidebar()">
+          <i data-lucide="users" class="w-5 h-5"></i>
+          <span>Users</span>
+        </a>
+        <a href="./Reports.html" class="flex items-center gap-3 px-4 py-3 rounded-lg text-purple-300 hover:bg-purple-800 transition" onclick="closeSidebar()">
+          <i data-lucide="bar-chart-3" class="w-5 h-5"></i>
+          <span>Reports</span>
+        </a>
+        <a href="./Support.html" class="flex items-center gap-3 px-4 py-3 rounded-lg text-purple-200 hover:bg-purple-800 transition bg-purple-800 border border-purple-600" onclick="closeSidebar()">
+          <i data-lucide="headphones" class="w-5 h-5"></i>
+          <span>Support</span>
+        </a>
+        <a href="./Settings.html" class="flex items-center gap-3 px-4 py-3 rounded-lg text-purple-300 hover:bg-purple-800 transition" onclick="closeSidebar()">
+          <i data-lucide="settings" class="w-5 h-5"></i>
+          <span>Settings</span>
+        </a>
+      </nav>
+
+      <!-- Footer -->
+      <div class="p-4 border-t border-purple-700">
+        <div class="bg-purple-800 rounded-lg p-4">
+          <p class="text-purple-300 text-sm mb-2">Admin User</p>
+          <p class="text-purple-100 font-semibold text-sm">Faheem Khan</p>
+          <button class="mt-3 w-full bg-purple-700 hover:bg-purple-600 text-purple-100 py-2 rounded text-sm transition">Logout</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Content Area -->
+    <div class="flex-1 flex flex-col overflow-hidden w-full">
+      <!-- Header -->
+      <div class="bg-gradient-to-r from-purple-900 to-purple-800 border-b border-purple-700 sticky top-0 z-40">
+        <div class="max-w-full mx-auto px-4 sm:px-6 py-4 flex items-center justify-between w-full">
+          <div>
+            <h2 class="text-2xl font-bold text-purple-100">Support Tickets</h2>
+            <p class="text-purple-400 text-sm">Manage user support requests</p>
+          </div>
+          <div class="flex items-center gap-4">
+            <button class="p-2 hover:bg-purple-800 rounded-lg transition">
+              <i data-lucide="bell" class="w-5 h-5 text-purple-300"></i>
+            </button>
+            <button class="p-2 hover:bg-purple-800 rounded-lg transition">
+              <i data-lucide="user-circle" class="w-5 h-5 text-purple-300"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Page Content -->
+      <div class="flex-1 overflow-y-auto p-4 sm:p-6 bg-gradient-to-br from-purple-950 via-purple-900 to-purple-950">
+        <div class="w-full">
+          <!-- Support Stats -->
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-8">
+            <div class="bg-gradient-to-br from-purple-800 to-purple-900 rounded-2xl shadow-lg p-6 border border-purple-700">
+              <div class="flex items-center justify-between">
+                <div>
+                  <p class="text-purple-400 text-sm font-semibold">Open Tickets</p>
+                  <p class="text-3xl font-bold text-purple-100 mt-2">24</p>
+                </div>
+                <i data-lucide="alert-circle" class="w-8 h-8 text-red-400"></i>
+              </div>
+            </div>
+
+            <div class="bg-gradient-to-br from-purple-800 to-purple-900 rounded-2xl shadow-lg p-6 border border-purple-700">
+              <div class="flex items-center justify-between">
+                <div>
+                  <p class="text-purple-400 text-sm font-semibold">In Progress</p>
+                  <p class="text-3xl font-bold text-purple-100 mt-2">12</p>
+                </div>
+                <i data-lucide="loader" class="w-8 h-8 text-yellow-400"></i>
+              </div>
+            </div>
+
+            <div class="bg-gradient-to-br from-purple-800 to-purple-900 rounded-2xl shadow-lg p-6 border border-purple-700">
+              <div class="flex items-center justify-between">
+                <div>
+                  <p class="text-purple-400 text-sm font-semibold">Resolved Today</p>
+                  <p class="text-3xl font-bold text-purple-100 mt-2">8</p>
+                </div>
+                <i data-lucide="check-circle" class="w-8 h-8 text-green-400"></i>
+              </div>
+            </div>
+          </div>
+
+          <!-- Support Tickets List -->
+          <div class="bg-gradient-to-br from-purple-800 to-purple-900 rounded-2xl shadow-lg border border-purple-700 overflow-hidden">
+            <div class="overflow-x-auto">
+              <table class="w-full">
+                <thead class="bg-purple-900 border-b border-purple-700">
+                  <tr>
+                    <th class="px-6 py-4 text-left text-purple-300 font-semibold">Ticket ID</th>
+                    <th class="px-6 py-4 text-left text-purple-300 font-semibold">User</th>
+                    <th class="px-6 py-4 text-left text-purple-300 font-semibold">Subject</th>
+                    <th class="px-6 py-4 text-left text-purple-300 font-semibold">Priority</th>
+                    <th class="px-6 py-4 text-left text-purple-300 font-semibold">Status</th>
+                    <th class="px-6 py-4 text-left text-purple-300 font-semibold">Created</th>
+                    <th class="px-6 py-4 text-left text-purple-300 font-semibold">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="border-b border-purple-700 hover:bg-purple-800/50 transition">
+                    <td class="px-6 py-4 text-purple-200">#TICKET-001</td>
+                    <td class="px-6 py-4 text-purple-200">John Smith</td>
+                    <td class="px-6 py-4 text-purple-200">Withdrawal not processed</td>
+                    <td class="px-6 py-4"><span class="bg-red-900/30 text-red-300 px-3 py-1 rounded-full text-sm">High</span></td>
+                    <td class="px-6 py-4"><span class="bg-red-900/30 text-red-300 px-3 py-1 rounded-full text-sm">Open</span></td>
+                    <td class="px-6 py-4 text-purple-200">2024-11-14</td>
+                    <td class="px-6 py-4">
+                      <button class="px-3 py-1 bg-purple-700 hover:bg-purple-600 text-purple-200 rounded transition text-sm">View</button>
+                    </td>
+                  </tr>
+                  <tr class="border-b border-purple-700 hover:bg-purple-800/50 transition">
+                    <td class="px-6 py-4 text-purple-200">#TICKET-002</td>
+                    <td class="px-6 py-4 text-purple-200">Sarah Johnson</td>
+                    <td class="px-6 py-4">Account verification issue</td>
+                    <td class="px-6 py-4"><span class="bg-yellow-900/30 text-yellow-300 px-3 py-1 rounded-full text-sm">Medium</span></td>
+                    <td class="px-6 py-4"><span class="bg-yellow-900/30 text-yellow-300 px-3 py-1 rounded-full text-sm">In Progress</span></td>
+                    <td class="px-6 py-4 text-purple-200">2024-11-13</td>
+                    <td class="px-6 py-4">
+                      <button class="px-3 py-1 bg-purple-700 hover:bg-purple-600 text-purple-200 rounded transition text-sm">View</button>
+                    </td>
+                  </tr>
+                  <tr class="border-b border-purple-700 hover:bg-purple-800/50 transition">
+                    <td class="px-6 py-4 text-purple-200">#TICKET-003</td>
+                    <td class="px-6 py-4 text-purple-200">Ahmed Ali</td>
+                    <td class="px-6 py-4">ROI calculation question</td>
+                    <td class="px-6 py-4"><span class="bg-green-900/30 text-green-300 px-3 py-1 rounded-full text-sm">Low</span></td>
+                    <td class="px-6 py-4"><span class="bg-green-900/30 text-green-300 px-3 py-1 rounded-full text-sm">Resolved</span></td>
+                    <td class="px-6 py-4 text-purple-200">2024-11-12</td>
+                    <td class="px-6 py-4">
+                      <button class="px-3 py-1 bg-purple-700 hover:bg-purple-600 text-purple-200 rounded transition text-sm">View</button>
+                    </td>
+                  </tr>
+                  <tr class="border-b border-purple-700 hover:bg-purple-800/50 transition">
+                    <td class="px-6 py-4 text-purple-200">#TICKET-004</td>
+                    <td class="px-6 py-4 text-purple-200">Maria Garcia</td>
+                    <td class="px-6 py-4">Login credentials reset</td>
+                    <td class="px-6 py-4"><span class="bg-yellow-900/30 text-yellow-300 px-3 py-1 rounded-full text-sm">Medium</span></td>
+                    <td class="px-6 py-4"><span class="bg-yellow-900/30 text-yellow-300 px-3 py-1 rounded-full text-sm">In Progress</span></td>
+                    <td class="px-6 py-4 text-purple-200">2024-11-14</td>
+                    <td class="px-6 py-4">
+                      <button class="px-3 py-1 bg-purple-700 hover:bg-purple-600 text-purple-200 rounded transition text-sm">View</button>
+                    </td>
+                  </tr>
+                  <tr class="hover:bg-purple-800/50 transition">
+                    <td class="px-6 py-4 text-purple-200">#TICKET-005</td>
+                    <td class="px-6 py-4 text-purple-200">Michael Chen</td>
+                    <td class="px-6 py-4">Website performance issue</td>
+                    <td class="px-6 py-4"><span class="bg-red-900/30 text-red-300 px-3 py-1 rounded-full text-sm">High</span></td>
+                    <td class="px-6 py-4"><span class="bg-red-900/30 text-red-300 px-3 py-1 rounded-full text-sm">Open</span></td>
+                    <td class="px-6 py-4 text-purple-200">2024-11-14</td>
+                    <td class="px-6 py-4">
+                      <button class="px-3 py-1 bg-purple-700 hover:bg-purple-600 text-purple-200 rounded transition text-sm">View</button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      lucide.createIcons();
+
+      function toggleSidebar() {
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('sidebarOverlay');
+        sidebar.classList.toggle('translate-x-0');
+        sidebar.classList.toggle('-translate-x-full');
+        overlay.classList.toggle('hidden');
+      }
+
+      function closeSidebar() {
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('sidebarOverlay');
+        sidebar.classList.add('-translate-x-full');
+        sidebar.classList.remove('translate-x-0');
+        overlay.classList.add('hidden');
+      }
+    </script>
+  </body>
+</html>
